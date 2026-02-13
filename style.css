@@ -38,7 +38,15 @@ body {
 .filter-btn.active { background: var(--primary-orange); color: white; border-color: var(--primary-orange); }
 
 /* Grid & Card */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+/* Tìm đến đoạn này trong style.css và thêm dòng justify-content */
+.grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    justify-content: center; /* Thêm dòng này để các thẻ luôn vào giữa */
+}
 
 .card { 
     background: white; 
@@ -121,3 +129,4 @@ body {
   75% { transform: translateX(2px) rotate(1deg); }
   100% { transform: translateX(0); }
 }
+
