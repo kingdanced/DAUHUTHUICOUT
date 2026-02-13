@@ -217,3 +217,8 @@ body {
 
 /* Ẩn nút cũ nếu bạn không dùng đến nữa */
 .btn-add { display: none; }
+
+/* Thêm hiệu ứng chuột khi rê vào nút Gọi ngay */
+.btn-call-modal {
+    cursor: pointer;
+}
