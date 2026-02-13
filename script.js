@@ -25,6 +25,7 @@ callButtons.forEach(btn => {
     btn.onclick = function(e) {
         e.preventDefault(); 
         modal.style.display = "block";
+        // Timeout nhỏ để đảm bảo thuộc tính display:block đã được trình duyệt nhận trước khi thêm class show
         setTimeout(() => {
             modal.classList.add("show");
         }, 10);
