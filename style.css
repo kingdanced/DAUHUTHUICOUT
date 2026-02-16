@@ -63,6 +63,16 @@ body {
     margin-top: -5px;
 }
 
+.filter-bar {
+    gap: 8px;  /* Giảm từ giá trị cũ */
+}
+
+.filter-btn {
+    padding: 8px 14px;  /* Giảm padding */
+    font-size: 0.9rem;  /* Giảm kích chữ */
+    border-radius: 20px;
+}
+
 @keyframes sway {
     0% { transform: rotate(-5deg); }
     100% { transform: rotate(5deg); }
@@ -199,4 +209,5 @@ body {
     .logo { font-size: 1.8rem; }
     .lantern-container { top: 0; }
     .lantern { font-size: 30px; }
+
 }
