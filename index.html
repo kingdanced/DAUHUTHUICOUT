@@ -27,10 +27,11 @@
         <p class="sub-logo">Món ăn đường phố - Hương vị khó quên</p>
     </div>
 
-    <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterMenu('dau-hu', this)">🌼 Đậu hủ</button>
-        <button class="filter-btn" onclick="filterMenu('do-uong', this)">🍹 Đồ uống</button>
-    </div>
+<div class="filter-bar">
+    <button class="filter-btn active" onclick="filterMenu('all', this)">🧧 Tất cả</button>
+    <button class="filter-btn" onclick="filterMenu('dau-hu', this)">🌼 Đậu hủ</button>
+    <button class="filter-btn" onclick="filterMenu('do-uong', this)">🍹 Đồ uống</button>
+</div>
 
 
     <div class="grid" id="menu-grid">
@@ -83,7 +84,7 @@
         </div>
 
         <!-- Trà sữa -->
-        <div class="card do-uong hidden">
+        <div class="card do-uong">
             <div class="price-tag">20K</div>
             <img src="images/tra-sua-r1.jpg" alt="Trà sữa Bin Bin" onerror="this.src='https://placehold.co/400x300?text=Tra+Sua'">
             <div class="card-info">
@@ -99,7 +100,7 @@
         </div>
 
         <!-- Trà xoài -->
-        <div class="card do-uong hidden">
+        <div class="card do-uong">
             <div class="price-tag">25K</div>
             <img src="images/tra-xoai-chanh-day.jpg" alt="Trà xoài chanh dây" onerror="this.src='https://placehold.co/400x300?text=Tra+Xoai'">
             <div class="card-info">

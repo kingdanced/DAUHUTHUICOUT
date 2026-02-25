@@ -3,7 +3,7 @@
     --bg-cream: #fffdf0; 
     --text-brown: #92400e;
     --accent-yellow: #fbbf24;
-    --tet-red: #d0021b; /* Màu đỏ truyền thống rực rỡ */
+    --tet-red: #d0021b; 
     --tet-gold: #ffd700;
 }
 
@@ -14,309 +14,102 @@ body {
     overflow-x: hidden;
 }
 
-/* Trang trí Tết */
-#tet-blossoms {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 99;
-}
+/* --- TRANG TRÍ TẾT --- */
+#tet-blossoms { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99; }
+.blossom { position: absolute; color: #ffd700; font-size: 20px; user-select: none; animation: fall linear forwards; }
+@keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
 
-.blossom {
-    position: absolute;
-    color: #ffd700;
-    font-size: 20px;
-    user-select: none;
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-/* Lồng đèn */
-.lantern-container {
-    position: fixed;
-    top: -10px;
-    z-index: 100;
-    pointer-events: none;
-}
+.lantern-container { position: fixed; top: -10px; z-index: 100; pointer-events: none; }
 .lantern-container.left { left: 10px; }
 .lantern-container.right { right: 10px; }
+.lantern { font-size: 40px; display: flex; flex-direction: column; align-items: center; animation: sway 3s ease-in-out infinite alternate; transform-origin: top center; }
+.lantern span { font-size: 12px; background: var(--tet-red); color: white; padding: 2px 5px; border-radius: 4px; font-weight: bold; margin-top: -5px; }
+@keyframes sway { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
 
-.lantern {
-    font-size: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: sway 3s ease-in-out infinite alternate;
-    transform-origin: top center;
-}
-.lantern span {
-    font-size: 12px;
-    background: var(--tet-red);
-    color: white;
-    padding: 2px 5px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-top: -5px;
-}
-
-.filter-bar {
-    gap: 8px;  /* Giảm từ giá trị cũ */
-}
-
-.filter-btn {
-    padding: 8px 14px;  /* Giảm padding */
-    font-size: 0.9rem;  /* Giảm kích chữ */
-    border-radius: 20px;
-}
-
-@keyframes sway {
-    0% { transform: rotate(-5deg); }
-    100% { transform: rotate(5deg); }
-}
-
-/* Header */
+/* --- HEADER --- */
 .header { text-align: center; margin-bottom: 30px; }
-.logo {
-  /* Đổi từ trắng sang màu đỏ Tết rực rỡ */
-  color: #D32F2F; 
-  font-weight: 800;
-  font-size: 2.2rem;
-  margin: 5px 0;
-  /* Đổi bóng đổ xám sang màu vàng gold để tạo hiệu ứng sang trọng hơn */
-  text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.5); 
-  text-transform: uppercase;
-}
+.logo { color: var(--tet-red) !important; font-weight: 800; font-size: 2.2rem; margin: 5px 0; text-transform: uppercase; text-shadow: 1px 1px 0px var(--tet-gold); }
 .sub-logo { font-size: 0.95rem; color: var(--text-brown); font-style: italic; }
-.tet-badge {
-    background: var(--tet-red);
-    color: white;
-    display: inline-block;
-    padding: 5px 20px;
-    border-radius: 50px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(208, 2, 27, 0.3);
-}
-/* Intro */
-.intro-container {
-    max-width: 800px; margin: 20px auto 40px; background: white;
-    padding: 30px; border-radius: 20px; text-align: center;
-    border-left: 5px solid var(--tet-red);
-    border-right: 5px solid var(--tet-red);
-    box-shadow: 0 4px 15px rgba(208, 2, 27, 0.1);
-}
+.tet-badge { background: var(--tet-red); color: white; display: inline-block; padding: 5px 20px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px rgba(208, 2, 27, 0.2); }
 
-.highlight-text { color: var(--tet-red); font-weight: bold; }
-
-/* Filter Bar */
-.filter-bar { 
-    display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; 
-    position: sticky; top: 0; background: rgba(255, 253, 240, 0.9); 
-    padding: 15px 0; z-index: 10; 
-    backdrop-filter: blur(5px);
-}
-.filter-btn { 
-    padding: 10px 25px; border-radius: 25px; border: 2px solid var(--tet-gold); 
-    background: white; cursor: pointer; font-weight: bold; color: var(--text-brown); 
-    transition: 0.3s;
-}
+/* --- FILTER BAR --- */
+.filter-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; position: sticky; top: 0; background: rgba(255, 253, 240, 0.9); padding: 15px 0; z-index: 10; backdrop-filter: blur(5px); }
+.filter-btn { padding: 10px 25px; border-radius: 25px; border: 2px solid var(--tet-gold); background: white; cursor: pointer; font-weight: bold; color: var(--text-brown); transition: 0.3s; }
 .filter-btn.active { background: var(--tet-red); color: white; border-color: var(--tet-red); }
 
-/* Menu Grid */
+/* --- GRID & CARDS (SỬA LỖI HỞ VIỀN & CĂN GIỮA) --- */
 .grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 320px)); 
+    display: flex; 
+    flex-wrap: wrap; 
     gap: 25px; 
     max-width: 1200px; 
     margin: 0 auto; 
-    justify-content: center;
+    justify-content: center; 
+    align-items: stretch;
 }
 
 .card { 
+    width: 320px; 
     background: white; 
     border-radius: 20px; 
     overflow: hidden; 
     position: relative; 
-    border: 2px solid #fef3c7; 
+    border: 3px solid var(--tet-gold); /* Một viền vàng duy nhất cho toàn bộ thẻ */
     transition: all 0.3s ease;
+    display: flex; 
+    flex-direction: column;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.05);
 }
 
+.card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(208, 2, 27, 0.15); border-color: var(--tet-red); }
+
+.card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+
+.card-info { 
+    padding: 20px; 
+    background: white !important; 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    border: none !important; /* Xóa viền thừa gây lỗi hở */
+    box-shadow: none !important;
+}
+
+.card-info h3 { margin: 0 0 10px 0; color: var(--text-brown); }
+.price-tag { position: absolute; top: 15px; right: 15px; background: var(--tet-red); color: var(--tet-gold); padding: 5px 15px; border-radius: 12px; font-weight: 800; z-index: 2; border: 1px solid var(--tet-gold); }
 .card.hidden { display: none; }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(208, 2, 27, 0.15);
-    border-color: var(--tet-red);
-}
-
-.card img { 
-    width: 100%; 
-    height: 220px; 
-    object-fit: cover; 
-    transition: transform 0.6s ease;
-}
-
-.card:hover img {
-    transform: scale(1.08);
-}
-
-.price-tag { 
-    position: absolute; top: 15px; right: 15px; background: var(--tet-red); 
-    color: var(--tet-gold); padding: 5px 15px; border-radius: 12px; font-weight: 800; 
-    z-index: 2; border: 1px solid var(--tet-gold);
-}
-
-.card-info { padding: 20px; background: white; }
-.card-info h3 { margin-top: 0; color: var(--text-brown); }
-
-/* Buttons */
+/* --- BUTTONS --- */
 .quick-order { display: flex; gap: 8px; margin-top: 15px; width: 100%; }
-
-.btn-quick { 
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    height: 42px; border-radius: 8px; 
-    text-decoration: none; font-size: 0.85rem; font-weight: bold; 
-    color: white; transition: 0.2s; box-sizing: border-box; 
-    border: none;
-}
-
+.btn-quick { flex: 1; display: flex; align-items: center; justify-content: center; height: 42px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: white; transition: 0.2s; border: none; }
 .btn-quick.shopee { background: #ee4d2d; }
 .btn-quick.grab { background: #00b14f; }
 .btn-quick.phone { background: var(--tet-red); cursor: pointer; }
 
-.btn-quick:hover { opacity: 0.9; transform: scale(1.03); }
+/* --- VÒNG XOAY TÀI LỘC (GIỮ NGUYÊN) --- */
+.wheel-wrapper { position: relative; width: 250px; height: 250px; margin: 20px auto; }
+#wheel { width: 100%; height: 100%; border-radius: 50%; border: 8px solid var(--tet-gold); background: conic-gradient(#d0021b 0deg 60deg, #fff 60deg 120deg, #d0021b 120deg 180deg, #fff 180deg 240deg, #d0021b 240deg 300deg, #fff 300deg 360deg); transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid var(--tet-gold); z-index: 10; }
+#spinBtn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; border-radius: 50%; border: 3px solid var(--tet-gold); background: var(--tet-red); color: white; font-weight: bold; cursor: pointer; z-index: 11; }
+#spin-count { background: var(--tet-red); color: white; padding: 2px 10px; border-radius: 15px; }
 
-/* MODAL */
-.modal { 
-    display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; 
-    background-color: rgba(0,0,0,0); transition: background-color 0.3s ease; 
-}
-.modal.show { display: block; background-color: rgba(0,0,0,0.7); }
-
-.modal-content { 
-    background: white; margin: -50px auto; padding: 30px; border-radius: 20px; width: 90%; max-width: 340px; 
-    text-align: center; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    border: 3px solid var(--tet-gold);
-}
-.modal.show .modal-content { margin: 15% auto; opacity: 1; }
-
+/* --- PHẦN CUỐI (INTRO, FOOTER, MODAL) --- */
+.intro-container, .footer-info { max-width: 800px; margin: 30px auto; background: white !important; padding: 30px; border-radius: 20px; text-align: center; border: 2px solid var(--tet-gold); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.modal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
+.modal.show { display: flex; align-items: center; justify-content: center; }
+.modal-content { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 340px; text-align: center; border: 3px solid var(--tet-gold); }
 .btn-delivery { display: block; padding: 15px; border-radius: 12px; font-weight: bold; color: white; margin-bottom: 10px; }
 .close-btn { background: #eee; border: none; padding: 12px; border-radius: 10px; cursor: pointer; margin-top: 15px; width: 100%; font-weight: bold; }
 
-/* Footer */
-.footer-info { 
-    max-width: 800px; margin: 40px auto; padding: 25px; background: white; 
-    border-radius: 20px; text-align: center; border-top: 5px solid var(--tet-red); 
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-}
+/* --- THỐNG KÊ --- */
+#view-count { background: var(--tet-gold); padding: 2px 8px; border-radius: 4px; }
+
+/* Dọn dẹp class rác gây lỗi */
+.item { display: none !important; }
 
 @media (max-width: 600px) {
     .logo { font-size: 1.8rem; }
-    .lantern-container { top: 0; }
-    .lantern { font-size: 30px; }
-
-}
-
-/* Cập nhật trong style.css */
-
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    /* Chèn hình nền lồng đèn */
-    background-size: cover;
-    margin: 0; 
-    padding: 20px; 
-    color: #333; 
-    overflow-x: hidden;
-}
-
-/* Làm cho các khung nội dung nổi bật trên nền đỏ */
-.intro-container, .card-info, .footer-info {
-    background: rgba(255, 255, 255, 0.92) !important; /* Trắng mờ nhẹ */
-    backdrop-filter: blur(8px); /* Hiệu ứng kính mờ hiện đại */
-    border: 2px solid var(--tet-gold);
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-/* Điều chỉnh màu chữ tiêu đề để không bị chìm */
-.logo {
-    /* Đổi màu chữ sang đỏ Tết và giữ ưu tiên cao nhất */
-    color: var(--tet-red) !important; 
-    
-    /* Xóa bỏ đổ bóng vàng (hoặc đen) */
-    text-shadow: none !important; 
-    
-    /* Đảm bảo không có viền bao quanh chữ */
-    border: none !important; 
-    
-    font-weight: 800;
-    font-size: 2.2rem;
-    margin: 5px 0;
-    text-align: center;
-}
-
-/* Thêm lớp phủ mờ cho các container để dễ đọc chữ */
-.intro-container, .footer-info, .card-info {
-    background: rgba(255, 255, 255, 0.95) !important; /* Trắng mờ để nổi bật trên nền đỏ */
-    backdrop-filter: blur(5px);
-}
-
-background: linear-gradient(rgba(208, 2, 27, 0.4), rgba(208, 2, 27, 0.4)), 
-            url('images/long-den.jpg') no-repeat center center fixed;
-
-    #view-count {
-    background: var(--tet-gold);
-    padding: 2px 8px;
-    border-radius: 4px;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-}
-
-/* --- CSS CHO VÒNG XOAY TÀI LỘC --- */
-
-/* Thêm vào cuối file style.css */
-
-.wheel-wrapper {
-    position: relative; 
-    width: 250px; 
-    height: 250px; 
-    margin: 20px auto;
-}
-
-#wheel {
-    width: 100%; 
-    height: 100%; 
-    border-radius: 50%; 
-    border: 8px solid var(--tet-gold); 
-    background: conic-gradient(
-        #d0021b 0deg 60deg, #fff 60deg 120deg, 
-        #d0021b 120deg 180deg, #fff 180deg 240deg, 
-        #d0021b 240deg 300deg, #fff 300deg 360deg
-    ); 
-    /* Quan trọng nhất: Giúp xoay mượt */
-    transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1); 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.wheel-pointer {
-    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-    width: 0; height: 0; border-left: 15px solid transparent;
-    border-right: 15px solid transparent; border-top: 25px solid var(--tet-gold);
-    z-index: 10;
-}
-
-#spinBtn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 65px; height: 65px; border-radius: 50%; border: 3px solid var(--tet-gold);
-    background: var(--tet-red); color: white; font-weight: bold; cursor: pointer;
-    z-index: 11; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-#spinBtn:disabled { background: #999; cursor: not-allowed; }
-
-#spin-count {
-    background: var(--tet-red); color: white;
-    padding: 2px 10px; border-radius: 15px;
+    .grid { gap: 15px; }
+    .card { width: 100%; max-width: 340px; }
 }

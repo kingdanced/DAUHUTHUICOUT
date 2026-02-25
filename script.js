@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Giả lập số người online cho sinh động
     const onlineEl = document.getElementById('online-count');
     if (onlineEl) onlineEl.innerText = Math.floor(Math.random() * 10) + 5;
+    filterMenu('all', document.querySelector('.filter-btn'))
 });
 
 /**
@@ -236,4 +237,18 @@ async function loadInitialStats() {
         const { data } = await supabaseClient.from('wheel_stats').select('total_views').eq('id', 1).single();
         if (data) document.getElementById('view-count').innerText = data.total_views;
     } catch (e) {}
+}
+
+function filterMenu(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
 }
