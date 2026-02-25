@@ -1,0 +1,24 @@
+name: Manual Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Nhập mã Commit Hash muốn quay về (7 ký tự đầu)'
+        required: true
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Reset to specific commit
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git reset --hard ${{ github.event.inputs.commit_hash }}
+          git push origin main --force
