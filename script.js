@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadSpinCount();   
     initModal();       
     loadInitialStats();
+    enableMouseWheelScroll();
     
     // Giả lập số người online
     const onlineEl = document.getElementById('online-count');
@@ -42,6 +43,39 @@ function renderHeader() {
             <p class="sub-logo">Món ăn đường phố - Hương vị khó quên</p>
         </div>
     `;
+}
+
+// Hỗ trợ kéo chuột để trượt menu trên PC
+function enableMouseWheelScroll() {
+    const slider = document.querySelector('.navbar ul');
+    if (!slider) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Tốc độ trượt
+        slider.scrollLeft = scrollLeft - walk;
+    });
 }
 
 

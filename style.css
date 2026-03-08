@@ -35,42 +35,61 @@ body {
 
 /* Định dạng Menu */
 
-/* Tổng thể thanh menu */
-/* --- CẤU HÌNH NAVBAR CỐ ĐỊNH VÀ CĂN GIỮA --- */
+/* --- NAVBAR TRƯỢT TRÊN CẢ PC VÀ MOBILE --- */
+/* --- Cấu hình tổng thể Navbar --- */
 .navbar {
     background-color: var(--tet-red);
-    position: -webkit-sticky; 
     position: sticky;
     top: 0;
     z-index: 10001;
-    width: 100%;
-    padding: 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-bottom: 2px solid var(--tet-gold);
-   /* ... các thuộc tính khác giữ nguyên ... */
+    width: 95%;
     max-width: 1100px;
-    
-    /* Chỉnh số 30px tùy theo độ rộng bạn muốn (ví dụ 20px, 30px, 40px) */
     margin: 10px auto 30px auto;
-    
     border-radius: 50px;
-    border: 2px solid var(--tet-red);
+    border: 2px solid var(--tet-gold);
+    overflow: hidden; /* Để bo góc không bị nội dung bên trong tràn ra */
 }
 
+/* --- Cấu hình danh sách trượt --- */
 .navbar ul {
     display: flex;
-    justify-content: center; /* Giữ chữ bắt đầu từ trái của khung cho chuyên nghiệp */
     align-items: center;
     list-style: none;
     margin: 0;
-    padding: 0 30px; /* Tăng padding một chút để chữ không chạm mép cong */
+    padding: 0;
     height: 60px;
-    gap: 10px;
+    overflow-x: auto; /* Cho phép trượt ngang */
+    white-space: nowrap;
+    scrollbar-width: none; /* Ẩn scrollbar Firefox */
+    
+    /* CĂN GIỮA: Dùng margin auto cho nội dung bên trong */
+    justify-content: flex-start; /* Mặc định cho mobile để dễ trượt */
 }
 
-/* Các phần li, a và hiệu ứng giữ nguyên như cũ của bạn */
+.navbar ul::-webkit-scrollbar {
+    display: none; /* Ẩn scrollbar Chrome/Safari */
+}
+
+/* Giữ cố định nút TRANG CHỦ khi trượt */
+.navbar li:first-child {
+    position: -webkit-sticky; /* Hỗ trợ Safari */
+    position: sticky;
+    left: 0;
+    z-index: 100;
+    background-color: var(--tet-red); /* Phải trùng màu nền navbar để che các nút trượt bên dưới */
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng tách biệt khi menu khác trượt qua */
+}
+
+/* Đảm bảo nút không bị mất màu riêng khi đứng yên */
+.navbar li:first-child a {
+    background-color: var(--accent-yellow) !important;
+    color: var(--tet-red) !important;
+    border-radius: 25px;
+    margin: 8px 10px;
+}
+
 .navbar li {
-    margin: 0 5px;
+    flex-shrink: 0;
 }
 
 .navbar li a {
@@ -79,10 +98,21 @@ body {
     font-weight: bold;
     padding: 8px 15px;
     font-size: 0.9rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
     display: block;
+    user-select: none;
+}
+
+/* --- CĂN GIỮA TRÊN PC (Màn hình rộng) --- */
+@media (min-width: 1024px) {
+    .navbar ul {
+        justify-content: center; /* Căn giữa toàn bộ menu khi đủ chỗ */
+    }
+    
+    /* Khi đã căn giữa thì không cần dính (sticky) nút Trang Chủ nữa */
+    .navbar li:first-child {
+        position: static; 
+        padding-left: 0;
+    }
 }
 
 .navbar li.active a {
