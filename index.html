@@ -14,6 +14,7 @@
 
 <div id="header-dynamic-container"></div>    
 
+
 <nav class="navbar"></nav>
     
 
@@ -129,6 +130,83 @@
             </p>
         </div>
     </div>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        
+        <div class="swiper-slide">
+            <div class="intro-container">
+                <h2>🧧 Hương Vị Đậu Hủ Truyền Thống</h2>
+                <p class="intro-text">
+                    Chào mừng bạn đến với <span class="highlight-text">Đậu Hủ Thúi Cô Út</span>, nơi gìn giữ nét ẩm thực đường phố độc đáo...
+                </p>
+            </div>
+        </div>
+
+        <div class="swiper-slide">
+            <div class="intro-container">
+                <h2 style="color: var(--tet-red); text-align: center;">🎡 Vòng Xoay Tài Lộc</h2>
+                <div class="wheel-wrapper">
+                    <div class="wheel-pointer"></div>
+                    <div id="wheel"></div>
+                    <button id="spinBtn" onclick="spinWheel()">XOAY</button>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <p style="color: var(--text-brown); font-weight: bold;">
+                        🔥 Đã có <span id="spin-count">0</span> lượt thử vận may
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+ var swiper = new Swiper(".mySwiper", {
+    // Cấu hình tự động chạy
+    autoplay: {
+        delay: 1500, // 5 giây chuyển slide một lần
+        disableOnInteraction: false, // Tiếp tục chạy sau khi người dùng chạm/vuốt
+        pauseOnMouseEnter: true, // Tạm dừng khi di chuột vào (để khách hàng chơi Vòng Xoay)
+    },
+    // Hiệu ứng chuyển cảnh (có thể chọn 'slide', 'fade', 'cube', 'flip')
+    effect: 'slide', 
+    speed: 800, // Tốc độ chuyển slide (ms)
+    
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets: true, // Chấm phân trang co giãn nhìn hiện đại hơn
+    },
+    autoHeight: true, 
+    loop: true, // Chạy vòng lặp vô tận
+});
+</script>
+
+<style>
+  .swiper { width: 100%; height: 100%; padding-bottom: 30px; }
+  .swiper-slide { display: flex; justify-content: center; align-items: center; }
+  .intro-container { width: 90%; max-width: 600px; margin: 0 auto; }
+</style>
+
+
 
 
 <div id="footer-contact-container"></div>

@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. HỆ THỐNG BIẾN & RESET (Cấu hình chung toàn trang)
+   ========================================================================== */
 :root { 
     --primary-orange: #d97706; 
     --bg-cream: #fffdf0; 
@@ -5,6 +8,8 @@
     --accent-yellow: #fbbf24;
     --tet-red: #d0021b; 
     --tet-gold: #ffd700;
+    --shadow-light: 0 4px 15px rgba(0,0,0,0.05);
+    --shadow-bold: 0 15px 40px rgba(0,0,0,0.2);
 }
 
 body { 
@@ -12,246 +17,347 @@ body {
     background-color: var(--bg-cream); 
     margin: 0; padding: 20px; color: #333; 
     overflow-x: hidden;
+    padding-top: 0 !important;
 }
 
-/* --- TRANG TRÍ TẾT --- */
+/* ==========================================================================
+   2. TRANG TRÍ TẾT (Hoa mai, Lồng đèn)
+   ========================================================================== */
 #tet-blossoms { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99; }
-.blossom { position: absolute; color: #ffd700; font-size: 20px; user-select: none; animation: fall linear forwards; }
-@keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+.blossom { position: absolute; color: var(--tet-gold); font-size: 20px; user-select: none; animation: fall linear forwards; }
+
+@keyframes fall { 
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } 
+}
 
 .lantern-container { position: fixed; top: -10px; z-index: 10000; pointer-events: none; }
 .lantern-container.left { left: 10px; }
 .lantern-container.right { right: 10px; }
-.lantern { font-size: 40px; display: flex; flex-direction: column; align-items: center; animation: sway 3s ease-in-out infinite alternate; transform-origin: top center; }
-.lantern span { font-size: 12px; background: var(--tet-red); color: white; padding: 2px 5px; border-radius: 4px; font-weight: bold; margin-top: -5px; }
+
+.lantern { 
+    font-size: 40px; display: flex; flex-direction: column; align-items: center; 
+    animation: sway 3s ease-in-out infinite alternate; transform-origin: top center; 
+}
+.lantern span { 
+    font-size: 12px; background: var(--tet-red); color: white; padding: 2px 5px; 
+    border-radius: 4px; font-weight: bold; margin-top: -5px; 
+}
+
 @keyframes sway { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
 
-/* --- HEADER --- */
+/* ==========================================================================
+   3. HEADER (Logo & Khẩu hiệu)
+   ========================================================================== */
 .header { text-align: center; margin-bottom: 30px; }
-
-.logo { color: var(--tet-red) !important; font-weight: 800; font-size: 2.2rem; margin: 5px 0; text-transform: uppercase; text-shadow: 1px 1px 0px var(--tet-gold); }
+.logo { 
+    color: var(--tet-red) !important; font-weight: 800; font-size: 2.2rem; 
+    margin: 5px 0; text-transform: uppercase; text-shadow: 1px 1px 0px var(--tet-gold); 
+}
 .sub-logo { font-size: 0.95rem; color: var(--text-brown); font-style: italic; }
-.tet-badge { background: var(--tet-red); color: white; display: inline-block; padding: 5px 20px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px rgba(208, 2, 27, 0.2); }
-
-/* Định dạng Menu */
-
-/* --- NAVBAR TRƯỢT TRÊN CẢ PC VÀ MOBILE --- */
-/* --- Cấu hình tổng thể Navbar --- */
-.navbar {
-    background-color: var(--tet-red);
-    position: sticky;
-    top: 0;
-    z-index: 10001;
-    width: 95%;
-    max-width: 1100px;
-    margin: 10px auto 30px auto;
-    border-radius: 50px;
-    border: 2px solid var(--tet-gold);
-    overflow: hidden; /* Để bo góc không bị nội dung bên trong tràn ra */
+.tet-badge { 
+    background: var(--tet-red); color: white; display: inline-block; padding: 5px 20px; 
+    border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px rgba(208, 2, 27, 0.2); 
 }
 
-/* --- Cấu hình danh sách trượt --- */
+/* ==========================================================================
+   4.1. THANH ĐIỀU HƯỚNG CHÍNH (NAVBAR)
+   ========================================================================== */
+.navbar {
+    background-color: var(--tet-red); 
+    position: sticky; 
+    top: 10px; 
+    z-index: 10001;
+    width: 95%; 
+    max-width: 1100px; 
+    margin: 10px auto 30px auto;
+    border-radius: 50px; 
+    border: 2px solid var(--tet-gold); 
+    overflow: visible !important; /* QUAN TRỌNG: Để menu con hiện ra được */
+    height: 50px;
+    display: block !important; /* Ép buộc hiển thị */
+}
+
 .navbar ul {
+    display: flex; 
+    align-items: center; 
+    list-style: none; 
+    margin: 0; 
+    padding: 0 20px;
+    height: 100%; 
+    justify-content: center;
+    overflow: visible !important; 
+}
+
+.navbar li { 
+    position: relative; 
+    height: 100%;
     display: flex;
     align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 60px;
-    overflow-x: auto; /* Cho phép trượt ngang */
-    white-space: nowrap;
-    scrollbar-width: none; /* Ẩn scrollbar Firefox */
-    
-    /* CĂN GIỮA: Dùng margin auto cho nội dung bên trong */
-    justify-content: flex-start; /* Mặc định cho mobile để dễ trượt */
-}
-
-.navbar ul::-webkit-scrollbar {
-    display: none; /* Ẩn scrollbar Chrome/Safari */
-}
-
-/* Giữ cố định nút TRANG CHỦ khi trượt */
-.navbar li:first-child {
-    position: -webkit-sticky; /* Hỗ trợ Safari */
-    position: sticky;
-    left: 0;
-    z-index: 100;
-    background-color: var(--tet-red); /* Phải trùng màu nền navbar để che các nút trượt bên dưới */
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng tách biệt khi menu khác trượt qua */
-}
-
-/* Đảm bảo nút không bị mất màu riêng khi đứng yên */
-.navbar li:first-child a {
-    background-color: var(--accent-yellow) !important;
-    color: var(--tet-red) !important;
-    border-radius: 25px;
-    margin: 8px 10px;
-}
-
-.navbar li {
-    flex-shrink: 0;
-}
+} 
 
 .navbar li a {
-    color: white;
-    text-decoration: none;
+    color: white !important; 
+    text-decoration: none; 
     font-weight: bold;
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    display: block;
-    user-select: none;
-}
-
-/* --- CĂN GIỮA TRÊN PC (Màn hình rộng) --- */
-@media (min-width: 1024px) {
-    .navbar ul {
-        justify-content: center; /* Căn giữa toàn bộ menu khi đủ chỗ */
-    }
-    
-    /* Khi đã căn giữa thì không cần dính (sticky) nút Trang Chủ nữa */
-    .navbar li:first-child {
-        position: static; 
-        padding-left: 0;
-    }
-}
-
-.navbar li.active a {
-    background-color: #fce791;
-    color: #b45309;
-    border-radius: 10px;
-    padding: 8px 15px;
-}
-
-.navbar li a:hover {
-    background-color: rgba(255, 255, 255, 0.2); 
-    border-radius: 10px;
-}
-
-/* Fix lỗi body bị mất padding khi có menu cố định */
-body {
-    padding-top: 0 !important; /* Reset lại để không bị khoảng trắng lạ */
-}
-
-
-
-/* --- THANH LỌC MÓN ĂN (FILTER BAR) --- */
-
-
-/* Khung bao quanh các nút */
-.filter-bar {
+    padding: 0 18px; 
+    font-size: 0.95rem; 
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px; /* Đẩy khoảng cách top như bạn muốn */
-    margin-bottom: 20px;
-    padding: 10px;
+    align-items: center;
+    height: 100%;
 }
 
-/* Định dạng chữ và kiểu dáng nút */
+/* Hiệu ứng "Gom nút" màu trắng khi di chuột vào mục có menu con */
+.navbar li.has-submenu:hover > a {
+    background-color: #ffffff; 
+    color: var(--tet-red) !important;
+    border-radius: 15px 15px 0 0;
+}
+
+/* ==========================================================================
+   4.2. MENU CON (SUBMENU)
+   ========================================================================== */
+.submenu {
+    display: none !important; /* Ẩn lúc đầu */
+    position: absolute; 
+    top: 60px; 
+    left: 0;
+    background-color: #ffffff; 
+    border-radius: 0 0 15px 15px; 
+    list-style: none; 
+    padding: 10px 0; 
+    min-width: 250px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2); 
+    z-index: 999999; 
+    flex-direction: column !important; /* Luôn xếp dọc */
+    height: auto !important; 
+    max-height: 70vh;
+    overflow-y: auto;
+    margin: 0;
+}
+
+/* Hiện submenu khi hover */
+.navbar li.has-submenu:hover .submenu { 
+    display: flex !important; 
+}
+
+.submenu li { width: 100%; display: block; }
+
+.submenu li a { 
+    color: #333 !important; 
+    padding: 12px 20px !important; 
+    border-bottom: 1px solid #f0f0f0; 
+    display: block !important;
+    font-weight: 500;
+}
+
+.submenu li a:hover {
+    background-color: #fff1f1 !important;
+    color: var(--tet-red) !important;
+}
+
+/* ==========================================================================
+   4.3. RESPONSIVE NAVBAR (MOBILE SCROLL) - GIỐNG 24H
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;
+        margin: 0;
+        border-radius: 0; /* Bo sát viền màn hình trên mobile */
+        border-left: none;
+        border-right: none;
+        top: 0;
+        height: 50px; /* Thu nhỏ chiều cao trên mobile */
+    }
+
+    .navbar ul {
+        display: flex;
+        justify-content: flex-start; /* Ép các nút tràn ra bên phải */
+        align-items: center;
+        overflow-x: auto; /* Kích hoạt trượt ngang */
+        overflow-y: hidden;
+        white-space: nowrap; /* Không cho phép xuống dòng */
+        padding: 0 15px;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* Trượt mượt trên iPhone */
+    }
+
+    /* Ẩn thanh cuộn để nhìn đẹp như 24h */
+    .navbar ul::-webkit-scrollbar {
+        display: none;
+    }
+    .navbar ul {
+        -ms-overflow-style: none;  /* IE và Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .navbar li {
+        display: inline-block;
+        height: 100%;
+    }
+
+    .navbar li a {
+        padding: 0 15px;
+        font-size: 0.85rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Điều chỉnh submenu trên Mobile để không bị che khuất */
+    .submenu {
+        position: fixed; /* Cố định vị trí so với màn hình */
+        top: 50px;
+        left: 0;
+        width: 100vw;
+        max-height: 60vh;
+        border-radius: 0 0 15px 15px;
+    }
+}
+
+
+/* ==========================================================================
+   5. BỘ LỌC (FILTER BAR) & GRID SẢN PHẨM
+   ========================================================================== */
+.filter-bar { display: flex; justify-content: center; gap: 15px; margin: 30px 0 20px 0; padding: 10px; }
 .filter-btn {
-    background-color: #ffffff; /* Nền trắng để nổi bật chữ */
-    color: #c00000;            /* Màu đỏ đô giống thương hiệu của bạn */
-    border: 2px solid #c00000;
-    padding: 10px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;          /* Làm chữ đậm lên */
-    text-transform: uppercase; /* Viết hoa toàn bộ cho sang trọng */
-    letter-spacing: 1px;       /* Khoảng cách giữa các chữ cái */
-    border-radius: 50px;       /* Bo tròn kiểu viên thuốc */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ hiện đại */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho nút */
+    /* --- Màu sắc và Viền --- */
+    background-color: #fff;       /* Màu nền trắng */
+    color: #c00000;               /* Màu chữ đỏ đô */
+    border: 2px solid #c00000;    /* Viền dày 2px, nét liền, màu đỏ đô */
+
+    /* --- Kích thước và Phông chữ --- */
+    padding: 10px 15px;           /* Khoảng cách trong: trên-dưới 10px, trái-phải 25px */
+    font-size: 1.1rem;            /* Kích thước chữ (tương đương ~17.6px) */
+    font-weight: 700;             /* Độ đậm của chữ (700 là Bold) */
+    
+    /* --- Hình dạng và Con trỏ --- */
+    border-radius: 50px;          /* Bo tròn góc kiểu viên thuốc */
+    cursor: pointer;              /* Hiện hình bàn tay khi rà chuột vào */
+    
+    /* --- Hiệu ứng đổ bóng và Chuyển động --- */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Đổ bóng nhẹ phía dưới tạo độ nổi */
+    transition: all 0.3s ease;    /* Tạo hiệu ứng mượt mà khi thay đổi trạng thái (0.3 giây) */
+    
+    /* Loại bỏ đường viền mặc định của trình duyệt khi nhấn vào */
+    outline: none;
+}
+.filter-btn:hover, .filter-btn.active { 
+    background-color: #c00000; color: #fff; transform: translateY(-3px); 
 }
 
-/* Hiệu ứng khi di chuột qua hoặc khi nút đang được chọn */
-.filter-btn:hover, .filter-btn.active {
-    background-color: #c00000;
-    color: #ffffff;
-    transform: translateY(-3px); /* Nút bay nhẹ lên khi hover */
-    box-shadow: 0 6px 12px rgba(192, 0, 0, 0.3);
+/* Danh sách món ăn */
+.grid { 
+    display: flex; flex-wrap: wrap; gap: 25px; max-width: 1200px; 
+    margin: 30px auto; justify-content: center; align-items: stretch; 
+}
+.card { 
+    width: 320px; background: white; border-radius: 20px; overflow: hidden; 
+    position: relative; border: 3px solid var(--tet-gold); transition: 0.3s; 
+    display: flex; flex-direction: column; box-shadow: var(--shadow-light); 
+}
+.card:hover { transform: translateY(-8px); border-color: var(--tet-red); box-shadow: 0 15px 30px rgba(208,2,27,0.15); }
+.card img { width: 100%; height: 220px; object-fit: cover; }
+.card-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.price-tag { 
+    position: absolute; top: 15px; right: 15px; background: var(--tet-red); 
+    color: var(--tet-gold); padding: 5px 15px; border-radius: 12px; font-weight: 800; 
 }
 
-.filter-btn.active { background: var(--tet-red); color: white; border-color: var(--tet-red); }
-/* --- GRID & CARDS --- */
-.grid { display: flex; flex-wrap: wrap; gap: 25px; max-width: 1200px; margin-top: 30px;margin: 0 auto; justify-content: center; align-items: stretch; }
-.card { width: 320px; background: white; border-radius: 20px; overflow: hidden; position: relative; border: 3px solid var(--tet-gold); transition: all 0.3s ease; display: flex; flex-direction: column; box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
-.card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(208, 2, 27, 0.15); border-color: var(--tet-red); }
-.card img { width: 100%; height: 220px; object-fit: cover; display: block; }
-.card-info { padding: 20px; background: white !important; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.card-info h3 { margin: 0 0 10px 0; color: var(--text-brown); }
-.price-tag { position: absolute; top: 15px; right: 15px; background: var(--tet-red); color: var(--tet-gold); padding: 5px 15px; border-radius: 12px; font-weight: 800; z-index: 2; border: 1px solid var(--tet-gold); }
-.card.hidden { display: none; }
-
-/* --- BUTTONS --- */
-.quick-order { display: flex; gap: 8px; margin-top: 15px; width: 100%; }
-.btn-quick { flex: 1; display: flex; align-items: center; justify-content: center; height: 42px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: white; transition: 0.2s; border: none; }
+/* ==========================================================================
+   6. NÚT BẤM (BUTTONS) - SHOPEE, GRAB, PHONE
+   ========================================================================== */
+.quick-order { display: flex; gap: 8px; margin-top: 15px; }
+.btn-quick { 
+    flex: 1; display: flex; align-items: center; justify-content: center; 
+    height: 42px; border-radius: 8px; text-decoration: none; 
+    font-size: 0.85rem; font-weight: bold; color: white; border: none; 
+}
 .btn-quick.shopee { background: #ee4d2d; }
 .btn-quick.grab { background: #00b14f; }
 .btn-quick.phone { background: var(--tet-red); cursor: pointer; }
 
-/* --- VÒNG XOAY TÀI LỘC --- */
-.wheel-wrapper { position: relative; width: 250px; height: 250px; margin: 20px auto; }
-#wheel { width: 100%; height: 100%; border-radius: 50%; border: 8px solid var(--tet-gold); background: conic-gradient(#d0021b 0deg 60deg, #fff 60deg 120deg, #d0021b 120deg 180deg, #fff 180deg 240deg, #d0021b 240deg 300deg, #fff 300deg 360deg); transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-.wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid var(--tet-gold); z-index: 10; }
-#spinBtn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; border-radius: 50%; border: 3px solid var(--tet-gold); background: var(--tet-red); color: white; font-weight: bold; cursor: pointer; z-index: 11; }
-#spin-count { background: var(--tet-red); color: white; padding: 2px 10px; border-radius: 15px; }
-
-/* --- MODAL (FIX LỖI NHẢY VỊ TRÍ) --- */
-.modal { 
-    display: none; 
-    position: fixed; 
-    z-index: 9999; 
-    left: 0; top: 0; 
-    width: 100%; height: 100%; 
-    background-color: rgba(0,0,0,0.6); 
-    backdrop-filter: blur(3px); 
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    /* Giữ nội dung luôn ở giữa ngay cả khi lớp .show bị gỡ bỏ */
-    align-items: center; 
-    justify-content: center; 
+/* --- Định dạng cụm nút gọi trong Modal --- */
+/* Khung chứa 2 nút bên trong Modal */
+.modal-content .delivery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
 }
 
-.modal.show { 
-    display: flex; 
-    opacity: 1; 
-}
 
-.modal-content { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 25px; 
-    width: 90%; 
-    max-width: 360px; 
-    text-align: center; 
-    border: 4px solid var(--tet-gold); 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    position: relative;
-    /* Hiệu ứng thu nhỏ khi ẩn */
-    transform: scale(0.7);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.modal.show .modal-content {
-    transform: scale(1); /* Phóng to lên bình thường khi hiện */
-}
-
+/* Định dạng nút bên trong Modal */
 .modal-content .btn-delivery {
-    display: flex; align-items: center; justify-content: center;
-    height: 60px; font-size: 1.3rem; font-weight: bold;
-    border-radius: 15px; margin-bottom: 15px;
-    text-decoration: none; color: white; transition: 0.2s;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Nút bên trong Modal không được có class 'open-order-modal' để nó thực hiện cuộc gọi thật */
+
+.modal-content .btn-delivery:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
 }
 
 .close-btn { background: #eee; border: none; padding: 12px; border-radius: 10px; cursor: pointer; margin-top: 15px; width: 100%; font-weight: bold; }
 
-/* --- FOOTER & KHÁC --- */
-.intro-container, .footer-info { max-width: 800px; margin: 30px auto; background: white !important; padding: 30px; border-radius: 20px; text-align: center; border: 2px solid var(--tet-gold); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-.highlight-text { color: var(--tet-red); font-weight: bold; }
+
+/* ==========================================================================
+   7. VÒNG XOAY TÀI LỘC
+   ========================================================================== */
+.wheel-wrapper { position: relative; width: 250px; height: 250px; margin: 20px auto; }
+#wheel { 
+    width: 100%; height: 100%; border-radius: 50%; border: 8px solid var(--tet-gold); 
+    background: conic-gradient(#d0021b 0deg 60deg, #fff 60deg 120deg, #d0021b 120deg 180deg, #fff 180deg 240deg, #d0021b 240deg 300deg, #fff 300deg 360deg); 
+    transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1); 
+}
+#spinBtn { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 65px; height: 65px; border-radius: 50%; background: var(--tet-red); 
+    color: white; font-weight: bold; border: 3px solid var(--tet-gold); cursor: pointer; 
+}
+
+/* ==========================================================================
+   8. MODAL (Cửa sổ thông báo)
+   ========================================================================== */
+.modal { 
+    display: none; position: fixed; z-index: 9999; left: 0; top: 0; 
+    width: 100%; height: 100%; background: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(3px); opacity: 0; transition: 0.3s;
+    align-items: center; justify-content: center; 
+}
+.modal.show { display: flex; opacity: 1; }
+.modal-content { 
+    background: white; padding: 30px; border-radius: 25px; width: 90%; 
+    max-width: 360px; text-align: center; border: 4px solid var(--tet-gold); 
+    transform: scale(0.7); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
+}
+.modal.show .modal-content { transform: scale(1); }
+
+/* ==========================================================================
+   9. FOOTER & ĐIỀU CHỈNH MOBILE (RESPONSIVE)
+   ========================================================================== */
+.intro-container, .footer-info { 
+    max-width: 1100px; margin: 30px auto; background: white; padding: 5px; 
+    border-radius: 20px; text-align: center; border: 2px solid var(--tet-gold); 
+}
 
 @media (max-width: 600px) {
     .logo { font-size: 1.8rem; }
     .grid { gap: 15px; }
     .card { width: 100%; max-width: 340px; }
+    .navbar { border-radius: 20px; } /* Mobile bo ít hơn để dễ trượt */
+}
+
+@media (min-width: 1024px) {
+    .navbar ul { justify-content: center; }
 }
